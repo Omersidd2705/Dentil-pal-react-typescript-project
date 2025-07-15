@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
 const navbarStyles: React.CSSProperties = {
     position: 'fixed',
@@ -6,6 +6,7 @@ const navbarStyles: React.CSSProperties = {
     left: 0,
     width: '100%',
     backgroundColor: 'transparent',
+    overflow: 'hidden',
     padding: '0.5rem 2rem',
     display: 'flex',
     alignItems: 'center',
@@ -14,7 +15,6 @@ const navbarStyles: React.CSSProperties = {
     color: 'black',
     zIndex: 1000,
     boxShadow: '0 2px 8px rgba(0,0,0,0.05)',
-    transition: 'background 0.3s, color 0.3s',
 };
 
 const logoStyles: React.CSSProperties = {
@@ -24,18 +24,18 @@ const logoStyles: React.CSSProperties = {
 };
 
 const navContainerStyles: React.CSSProperties = {
+    flex: 1,
     display: 'flex',
-    alignItems: 'center',
+    justifyContent: 'center',
 };
 
 const navLinksStyles: React.CSSProperties = {
     listStyle: 'none',
     display: 'flex',
-    gap: '1.5rem',
+    gap: '2rem',
     margin: 0,
     padding: 0,
     alignItems: 'center',
-    flexDirection: 'row',
 };
 
 const navLinkStyles: React.CSSProperties = {
@@ -44,64 +44,35 @@ const navLinkStyles: React.CSSProperties = {
     fontWeight: 500,
     fontSize: '1rem',
     transition: 'color 0.3s, background 0.3s',
+    gap: '0.5rem',
     padding: '0.5rem 1rem',
     borderRadius: '4px',
     background: 'none',
 };
 
 const navLinkActiveStyles: React.CSSProperties = {
+  
     color: 'white',
 };
 
-const hamburgerStyles: React.CSSProperties = {
-    fontSize: '1.5rem',
-    cursor: 'pointer',
-    display: 'none',
-};
+const hoverColor = '#04AA6D';
 
 const Navbar: React.FC = () => {
-    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-    const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
-
     const activePath = window.location.pathname;
-
-    useEffect(() => {
-        const handleResize = () => {
-            setIsMobile(window.innerWidth < 768);
-            if (window.innerWidth >= 768) setIsMobileMenuOpen(false);
-        };
-        window.addEventListener('resize', handleResize);
-        return () => window.removeEventListener('resize', handleResize);
-    }, []);
 
     return (
         <>
-            <nav style={navbarStyles} className="navbar">
+            <nav style={navbarStyles}>
                 <div style={logoStyles}>DentiPal</div>
-
-                {isMobile && (
-                    <div style={hamburgerStyles} onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
-                        ☰
-                    </div>
-                )}
-
-                <div style={{ ...navContainerStyles, flexDirection: isMobile ? 'column' : 'row' }}>
-                    <ul
-                        style={{
-                            ...navLinksStyles,
-                            display: isMobile ? (isMobileMenuOpen ? 'flex' : 'none') : 'flex',
-                            flexDirection: isMobile ? 'column' : 'row',
-                            width: isMobile ? '100%' : undefined,
-                            alignItems: isMobile ? 'flex-start' : 'center',
-                            gap: isMobile ? '1rem' : '2rem',
-                        }}
-                    >
+                <div style={navContainerStyles}>
+                    <ul style={navLinksStyles}>
                         <li>
                             <a
                                 href="/"
                                 style={{
                                     ...navLinkStyles,
                                     ...(activePath === '/' ? navLinkActiveStyles : {}),
+                                    color: 'inherit', // Remove color for Professional Login
                                 }}
                                 className="navbar-link"
                             >
@@ -114,6 +85,7 @@ const Navbar: React.FC = () => {
                                 style={{
                                     ...navLinkStyles,
                                     ...(activePath === '/find-shift' ? navLinkActiveStyles : {}),
+                                    marginLeft: '10rem',
                                 }}
                                 className="navbar-link"
                             >
@@ -126,6 +98,7 @@ const Navbar: React.FC = () => {
                                 style={{
                                     ...navLinkStyles,
                                     ...(activePath === '/services' ? navLinkActiveStyles : {}),
+                                marginLeft: '20rem', 
                                 }}
                                 className="navbar-link"
                             >
@@ -138,6 +111,7 @@ const Navbar: React.FC = () => {
                                 style={{
                                     ...navLinkStyles,
                                     ...(activePath === '/contact' ? navLinkActiveStyles : {}),
+                               marginLeft: '1rem',
                                 }}
                                 className="navbar-link"
                             >
@@ -147,33 +121,15 @@ const Navbar: React.FC = () => {
                     </ul>
                 </div>
             </nav>
-
             <style>
                 {`
-                .navbar:hover {
-                    background: white !important;
-                    color: black !important;
-                }
-                .navbar:hover .navbar-link {
-                    color: black !important;
-                }
                 .navbar-link {
                     color: black;
                     background: none;
                 }
                 .navbar-link:hover {
-                    color: #04AA6D;
+                    color: ${hoverColor};
                     background: rgba(4,170,109,0.08);
-                }
-
-                @media (max-width: 768px) {
-                    .navbar-link {
-                        width: 100%;
-                        display: block;
-                    }
-                    .hamburger {
-                        display: block;
-                    }
                 }
                 `}
             </style>
