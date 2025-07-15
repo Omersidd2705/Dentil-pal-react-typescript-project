@@ -1,32 +1,34 @@
 import React from 'react';
+import type { CSSProperties } from 'react';
+
 import Navbar from './Navbar';
 
+const listItemStyle: CSSProperties = {
+    textAlign: 'center',
+    fontWeight: 'bold',
+    border: '2px solid #ccc',
+    borderRadius: '18px',
+    padding: '12px',
+    background: 'rgba(255,255,255,0.3)',
+    backdropFilter: 'blur(6px)',
+    transition: 'background 0.3s',
+    cursor: 'pointer',
+};
+
+const blurPStyle: CSSProperties = {
+    fontSize: '3rem',
+    fontFamily: 'sans-serif',
+    position: 'absolute',
+    bottom: '20px',
+    left: '20px',
+    color: '#fff',
+    background: 'transparent',
+    padding: '8px 16px',
+    borderRadius: '8px',
+    marginBottom: '300px',
+};
+
 const Homepages: React.FC = () => {
-    const listItemStyle = {
-        textAlign: 'center',
-        fontWeight: 'bold',
-        border: '2px solid #ccc',
-        borderRadius: '18px',
-        padding: '12px',
-        background: 'rgba(255,255,255,0.3)',
-        backdropFilter: 'blur(6px)',
-        transition: 'background 0.3s',
-        cursor: 'pointer',
-    };
-
-    const blurPStyle = {
-        fontSize: '3rem',
-        fontFamily: 'sans-serif',
-        position: 'absolute',
-        bottom: '20px',
-        left: '20px',
-        color: '#fff',
-        background: 'transparent',
-        padding: '8px 16px',
-        borderRadius: '8px',
-        marginBottom: '300px',
-    };
-
     return (
         <div>
             <Navbar />
@@ -42,6 +44,7 @@ const Homepages: React.FC = () => {
                     zIndex: 0,
                 }}
             >
+                {/* Left Image and Content */}
                 <div style={{ flex: 1, position: 'relative' }}>
                     <img
                         src="/images/doctor.jpeg"
@@ -54,8 +57,10 @@ const Homepages: React.FC = () => {
                         }}
                     />
                     <p style={blurPStyle}>
-                        Iam a dental Professional and I am here to help you.
+                        I am a dental Professional and I am here to help you.
                     </p>
+
+                    {/* List + Search Box */}
                     <div
                         style={{
                             position: 'absolute',
@@ -73,9 +78,15 @@ const Homepages: React.FC = () => {
                     >
                         <div className="homepage-list-item" style={listItemStyle}>Registered dental hygiene</div>
                         <div className="homepage-list-item" style={listItemStyle}>Dental Assistants</div>
-                        <div className="homepage-list-item" style={listItemStyle}>From Desk</div>
+                        <div className="homepage-list-item" style={listItemStyle}>Front Desk</div>
                         <div className="homepage-list-item" style={{ ...listItemStyle, gridColumn: '2' }}>Associate</div>
-                        <div style={{ gridColumn: '1 / span 3', display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '16px' }}>
+                        <div style={{
+                            gridColumn: '1 / span 3',
+                            display: 'flex',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            marginTop: '16px'
+                        }}>
                             <input
                                 type="text"
                                 placeholder="Search dental services..."
@@ -111,6 +122,8 @@ const Homepages: React.FC = () => {
                         </div>
                     </div>
                 </div>
+
+                {/* Right Image and Content */}
                 <div style={{ flex: 1, position: 'relative' }}>
                     <img
                         src="/images/nurse.jpg"
@@ -125,6 +138,8 @@ const Homepages: React.FC = () => {
                     <p style={blurPStyle}>
                         You can contact me for any dental related issues.
                     </p>
+
+                    {/* List + Search Box */}
                     <div
                         style={{
                             position: 'absolute',
@@ -144,7 +159,13 @@ const Homepages: React.FC = () => {
                         <div className="homepage-list-item" style={listItemStyle}>Cleaning</div>
                         <div className="homepage-list-item" style={listItemStyle}>Whitening</div>
                         <div className="homepage-list-item" style={{ ...listItemStyle, gridColumn: '2' }}>Implants</div>
-                        <div style={{ gridColumn: '1 / span 3', display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '16px' }}>
+                        <div style={{
+                            gridColumn: '1 / span 3',
+                            display: 'flex',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            marginTop: '16px'
+                        }}>
                             <input
                                 type="text"
                                 placeholder="Search dental services..."
@@ -180,6 +201,8 @@ const Homepages: React.FC = () => {
                         </div>
                     </div>
                 </div>
+
+                {/* Global Styles */}
                 <style>
                     {`
                         .homepage-image {
